@@ -1,5 +1,5 @@
 /*
-What are the most optimal skills to learn(aka its high_in_demand and high_paying_skill)
+What are the most optimal skills to learn(aka its high_in_demand and high_paying_skill)?
 - Combining both top_demanded_skills and top_paying_skills_based_on_salary for more optimal findings
 */;
 
@@ -46,4 +46,4 @@ FROM
 INNER JOIN top_payable_avg_skills ON demand_skill.skill_id = top_payable_avg_skills.skill_id
 ORDER BY
     demand_skill.skills_demand_count DESC,
-    top_payable_avg_skills.Average_Salary DESC
+    top_payable_avg_skills.Average_Salary DESC;

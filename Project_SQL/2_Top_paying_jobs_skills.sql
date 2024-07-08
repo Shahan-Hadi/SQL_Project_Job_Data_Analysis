@@ -1,5 +1,5 @@
 /*
-What skills are required for the top paying jobs
+What skills are required for the top paying jobs?
 - Using top 10 higest paying roles
 - Adding specific skills required for these roles
 - This will give us more detail overview

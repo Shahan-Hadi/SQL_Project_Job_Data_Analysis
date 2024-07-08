@@ -7,11 +7,11 @@ What are the top paying jobs?
 
 SELECT
     jp.job_id,
-    jp.job_title_short,
     jp.job_location,
-    jp.job_schedule_type,
+    jp.job_title_short,
     jp.salary_year_avg,
     jp.job_posted_date,
+    jp.job_schedule_type,
     companies.name AS Company_Name
 FROM
     job_postings_fact jp
