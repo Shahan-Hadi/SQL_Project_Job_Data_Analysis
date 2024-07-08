@@ -1,6 +1,6 @@
 /*
 What are the most optimal skills to learn(aka its high_in_demand and high_paying_skill)
-- 
+- Combining both top_demanded_skills and top_paying_skills_based_on_salary for more optimal findings
 */;
 
 WITH demand_skill AS
