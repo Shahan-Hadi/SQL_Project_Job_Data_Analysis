@@ -25,10 +25,10 @@ For my deepdiveinto the data analyst jpb market, I harnesses the power of severa
 # Analysis
 Each query in this project was crafted to dig into the many facets of the data analyst job market. Here’s the breakdown of my approach:
 
-### 1. Identifying Top-Paying Jobs:
+### 1. Identifying Top-Paying Data Analyst Jobs:
 **Objective**: Find out which job postings are offering the fattest paychecks for data analysts.
 
-**Approach**: Zero in on average salary figures and spotlight the highest-paying gigs.
+**Approach**: Zero in on average salary figures and spotlight the highest-paying gigs while focusing on Remote Jobs.
 ```sql
 SELECT
     jp.job_id,
