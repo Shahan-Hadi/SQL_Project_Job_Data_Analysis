@@ -17,12 +17,10 @@ WITH top_paying_jobs AS
         job_postings_fact AS jp
     LEFT JOIN company_dim AS companies ON jp.company_id = companies.company_id
     WHERE
-        job_title_short = 'Data Analyst'
-        AND job_location = 'Anywhere'  --Anywhere represents Remote jobs in database
-        AND salary_year_avg IS NOT NULL
+        salary_year_avg IS NOT NULL
     ORDER BY
-        salary_year_avg DESC
-    LIMIT 10
+        jp.salary_year_avg DESC
+
 )
 SELECT
         top_paying_jobs.*,
@@ -32,14 +30,5 @@ FROM
 INNER JOIN skills_job_dim ON top_paying_jobs.job_id = skills_job_dim.job_id
 INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
 ORDER BY
-    top_paying_jobs.salary_year_avg DESC;
-
-/*
-Observations:
-
-Top Skills:
-sql (8 occurrences)
-python (7 occurrences)
-tableau (6 occurrences)
-r (4 occurrences)
-*/
+    top_paying_jobs.salary_year_avg DESC
+LIMIT 10;

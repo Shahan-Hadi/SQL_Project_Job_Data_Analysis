@@ -6,6 +6,7 @@ What are top skills based on salary?
 */;
 
 SELECT
+    job_title_short,
     skills,
     Round(avg(salary_year_avg), 0) AS Average_Salary
 
@@ -14,10 +15,12 @@ FROM
 INNER JOIN skills_job_dim ON jp.job_id = skills_job_dim.job_id
 INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
 WHERE
-    job_title_short = 'Data Analyst'
-    AND salary_year_avg IS NOT NULL
+    (job_title_short = 'Data Analyst'
+    OR job_title_short = 'Data Scientist')
+    ANDsalary_year_avg IS NOT NULL
 GROUP BY
+    job_title_short,
     skills
+    
 ORDER BY
     Average_Salary DESC
-LIMIT 20;
