@@ -1,7 +1,7 @@
 /*
-What skills are required for the top paying jobs?
+What skills are required for the top 10 paying jobs?
 - Using top 10 higest paying roles
-- Adding specific skills required for these roles
+- Adding specific skills required for these roles along with companies
 - This will give us more detail overview
 */;
 
@@ -30,5 +30,4 @@ FROM
 INNER JOIN skills_job_dim ON top_paying_jobs.job_id = skills_job_dim.job_id
 INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
 ORDER BY
-    top_paying_jobs.salary_year_avg DESC
-LIMIT 10;
+    top_paying_jobs.salary_year_avg DESC;
