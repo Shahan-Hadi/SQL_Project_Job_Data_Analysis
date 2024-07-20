@@ -1,6 +1,6 @@
 /*
-c
---Including all job postings
+Top demanded skills based on skills count
+Including all job postings
 */;
 
 SELECT
