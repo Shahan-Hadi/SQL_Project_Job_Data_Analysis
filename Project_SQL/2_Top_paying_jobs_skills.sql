@@ -17,9 +17,7 @@ WITH top_paying_jobs AS
         job_postings_fact AS jp
     LEFT JOIN company_dim AS companies ON jp.company_id = companies.company_id
     WHERE
-        job_title_short = 'Data Analyst'
-        AND job_location = 'Anywhere'  --Anywhere represents Remote jobs in database
-        AND salary_year_avg IS NOT NULL
+        salary_year_avg IS NOT NULL
     ORDER BY
         salary_year_avg DESC
     LIMIT 10
