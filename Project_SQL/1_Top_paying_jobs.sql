@@ -23,4 +23,4 @@ WHERE
     AND salary_year_avg IS NOT NULL
 ORDER BY
     salary_year_avg DESC
-limit 10
+limit 10;
