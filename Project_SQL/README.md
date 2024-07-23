@@ -71,12 +71,10 @@ WITH top_paying_jobs AS
         job_postings_fact AS jp
     LEFT JOIN company_dim AS companies ON jp.company_id = companies.company_id
     WHERE
-        job_title_short = 'Data Analyst'
-        AND job_location = 'Anywhere'  --Anywhere represents Remote jobs in database
-        AND salary_year_avg IS NOT NULL
+        salary_year_avg IS NOT NULL
     ORDER BY
-        salary_year_avg DESC
-    LIMIT 10
+        jp.salary_year_avg DESC
+
 )
 SELECT
         top_paying_jobs.*,
@@ -86,11 +84,12 @@ FROM
 INNER JOIN skills_job_dim ON top_paying_jobs.job_id = skills_job_dim.job_id
 INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
 ORDER BY
-    top_paying_jobs.salary_year_avg DESC;
+    top_paying_jobs.salary_year_avg DESC
+Limit 10;
 ```
 
 
-### 3. In-Demand Skills:
+### 3. Top In-Demand Skills:
 **Objective**: Identify which skills are most frequently required in job postings for data analysts.
 
 **Approach**: Count the occurrences of each skill across job postings and rank them to find the most sought-after skills.
@@ -110,35 +109,7 @@ ORDER BY
     skills_count DESC;
 ```
 
-
-### 4. Financial Impact of Top Skills
-**Objective**: Uncover the average salary associated with each skill in data analyst roles to identify which skills are the most financially rewarding.
-
-**Approach**: Analyzed the average salary tied to each skill across all data analyst positions with specified salaries.
-Focused on roles with specified salaries to gauge how different skills influence earning potential.
-
-
-```sql
-SELECT
-    skills,
-    Round(avg(salary_year_avg), 0) AS Average_Salary
-
-FROM
-    job_postings_fact AS jp
-INNER JOIN skills_job_dim ON jp.job_id = skills_job_dim.job_id
-INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
-WHERE
-    job_title_short = 'Data Analyst'
-    AND salary_year_avg IS NOT NULL
-GROUP BY
-    skills
-ORDER BY
-    Average_Salary DESC
-LIMIT 20;
-```
-
-
-### 5. Skills and Salary Correlation:
+### 4. Best Optimal Skills (Skills and Salary Correlation):
 **Objective**: Explore how different skills stack up against salary levels for data analysts.
 
 **Approach**: Merge salary data with skill sets to analyze which skills are driving the highest pay.
@@ -156,9 +127,7 @@ WITH demand_skill AS
     INNER JOIN skills_job_dim ON jp.job_id = skills_job_dim.job_id
     INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
     WHERE
-        job_title_short = 'Data Analyst'
-        AND salary_hour_avg IS NOT NULL
-        AND job_work_from_home = TRUE
+         salary_hour_avg IS NOT NULL
     Group BY
         skills_dim.skill_id
 ), top_payable_avg_skills AS
@@ -166,18 +135,15 @@ WITH demand_skill AS
     SELECT
         skills_job_dim.skill_id,
         Round(avg(salary_year_avg), 0) AS Average_Salary
-
     FROM
         job_postings_fact AS jp
     INNER JOIN skills_job_dim ON jp.job_id = skills_job_dim.job_id
     INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
     WHERE
-        job_title_short = 'Data Analyst'
-        AND salary_year_avg IS NOT NULL
+         salary_year_avg IS NOT NULL
     GROUP BY
         skills_job_dim.skill_id
 )
-
 SELECT
     demand_skill.skill_id,
     demand_skill.skills,
@@ -205,11 +171,8 @@ The top 10 highest-paying data analyst roles require a combination of advanced t
 3. **In-Demand Skills**:
 Certain skills, like data manipulation, visualization, and programming languages, appear repeatedly in job postings, highlighting their necessity in the data analyst job market.
 
-4. **Financial Impact of Top Skills**:
-Skills that command the highest salaries include advanced data analysis and programming capabilities, significantly boosting earning potential.
-
-5. **Skills and Salary Correlation**:
+4. **Best Optimal Skills**:
 There is a strong correlation between specific skills and higher salary levels, with certain technical proficiencies leading to better compensation.
 
 ### Closing Thoughts
-This project has enhanced my sql skills and provided a comprehensive overview of the data analyst job market, highlighting critical insights into top-paying roles and in-demand skills. By analyzing various aspects such as salary levels, skill requirements, and job locations, we have identified key trends that can guide job seekers and employers alike. The findings underscore the importance of possessing advanced technical skills and staying updated with industry demands to secure lucrative positions. Overall, this analysis not only sheds light on the current job landscape but also equips individuals with valuable information to navigate their career paths more effectively.
+This project has enhanced my sql skills and provided a comprehensive overview of the data analyst job market, highlighting critical insights into top-paying roles and in-demand skills. By analyzing various aspects such as salary levels, skill requirements, and job locations,identified key trends that can guide job seekers and employers alike. The findings underscore the importance of possessing advanced technical skills and staying updated with industry demands to secure lucrative positions. Overall, this analysis not only sheds light on the current job landscape but also equips individuals with valuable information to navigate their career paths more effectively.
